@@ -1,7 +1,6 @@
 {
-  "name": "2.node-packge-manager",
+  "name": "user-created-package",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,11 +8,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
-    "mongoose": "^8.9.0",
-    "underscore": "^1.13.7"
-  },
-  "devDependencies": {
-    "jshint": "^2.13.6"
+    "create-package": "^1.1.0",
+    "create-package-1-bonsa": "^1.0.2"
   }
 }
