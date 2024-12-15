@@ -62,6 +62,25 @@ app.delete("/api/genres/:id", (req, res) => {
   }
 });
 
+// update
+app.put("/api/genres/:id", (req, res) => {
+  const id = req.params.id;
+  const index = genres.findIndex((c) => c.id === parseInt(id));
+  if (index !== -1) {
+    const genre = genres[index];
+    const { name } = req.body;
+    const valid = validateGenre({ name });
+    if (!valid) {
+      res.status(400).send("Invalid genre");
+    } else {
+      genre.name = name;
+      res.send(genre);
+    }
+  } else {
+    res.status(404).send("Genre not found");
+  }
+});
+
 app.listen(3000, () => {
   console.log("server is running on port 3000");
 });
