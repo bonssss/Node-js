@@ -32,6 +32,20 @@ function validateGenre(genre) {
   return schema.validate(genre);
 }
 
+//get method to fetch all
+app.get("/api/genres", (req, res) => {
+    if(genres.length == 0){
+        res.status(404).send("No genres found");
+    }
+    else{
+        res.send(genres);
+        }
+        });
+
+
+    
+
+    
 app.listen(3000, () => {
   console.log("server is running on port 3000");
 });
