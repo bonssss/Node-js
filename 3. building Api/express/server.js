@@ -41,6 +41,17 @@ app.get("/api/genres", (req, res) => {
         res.send(genres);
         }
         });
+        //get method to fetch one
+        app.get("/api/genres/:id", (req, res) => {
+            const id = req.params.id;
+            const genre = genres.find((c) => c.id === parseInt(id));
+            if (!genre) {
+                res.status(404).send("Genre not found");
+                } else {
+                    res.send(genre);
+                    }   
+                    });
+                    
 
 
     
