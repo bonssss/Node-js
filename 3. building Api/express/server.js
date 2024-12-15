@@ -34,29 +34,34 @@ function validateGenre(genre) {
 
 //get method to fetch all
 app.get("/api/genres", (req, res) => {
-    if(genres.length == 0){
-        res.status(404).send("No genres found");
-    }
-    else{
-        res.send(genres);
-        }
-        });
-        //get method to fetch one
-        app.get("/api/genres/:id", (req, res) => {
-            const id = req.params.id;
-            const genre = genres.find((c) => c.id === parseInt(id));
-            if (!genre) {
-                res.status(404).send("Genre not found");
-                } else {
-                    res.send(genre);
-                    }   
-                    });
-                    
+  if (genres.length == 0) {
+    res.status(404).send("No genres found");
+  } else {
+    res.send(genres);
+  }
+});
+//get method to fetch one
+app.get("/api/genres/:id", (req, res) => {
+  const id = req.params.id;
+  const genre = genres.find((c) => c.id === parseInt(id));
+  if (!genre) {
+    res.status(404).send("Genre not found");
+  } else {
+    res.send(genre);
+  }
+});
+//delete method
+app.delete("/api/genres/:id", (req, res) => {
+  const id = req.params.id;
+  const index = genres.findIndex((c) => c.id === parseInt(id));
+  if (index !== -1) {
+    genres.splice(index, 1);
+    res.send(genres);
+  } else {
+    res.status(404).send("Genre not found");
+  }
+});
 
-
-    
-
-    
 app.listen(3000, () => {
   console.log("server is running on port 3000");
 });
