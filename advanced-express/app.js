@@ -1,7 +1,11 @@
 const express = require('express')
+const morgan= require('morgan')
 const app = express()
 const logger =require('./middleware')
 app.use(express.json())
+app.use(morgan('tiny'))
+
+app.use(express.static('public'));
 
 app.use(logger)
 

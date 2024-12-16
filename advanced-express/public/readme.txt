@@ -1,0 +1,1 @@
+hello this is readme fetched by express.static middleware
