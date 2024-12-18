@@ -1,3 +1,4 @@
+const config =require('config')
 const express = require('express')
 const morgan= require('morgan')
 const app = express()
@@ -12,6 +13,8 @@ app.use(express.json())
 
 app.use(express.static('public'));
 
+console.log("App name: " + config.get('name'))
+console,log("Description: " + config.get('mail.host'))
 
 app.use(logger)
 
