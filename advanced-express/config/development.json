@@ -1,0 +1,6 @@
+{
+    "name":"Development config",
+    "mail":{
+        "host":"smtp.example.com-deveopment"
+    }
+}

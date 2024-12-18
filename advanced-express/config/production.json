@@ -1,0 +1,6 @@
+{
+    "name":"Production config",
+    "mail":{
+        "host":"smtp.example.com"
+    }
+}
