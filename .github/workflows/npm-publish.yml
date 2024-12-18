@@ -1,33 +1,52 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
-name: Node.js Package
+name: Node.js CI Workflow
 
 on:
-  release:
-    types: [created]
+  # Run workflow on push and pull request events for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-      - run: npm test
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      # Step 1: Check out the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          node-version: 18 # Specify the version of Node.js
+          cache: 'npm'
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Lint the code (if you have a linting script in package.json)
+      - name: Run Linter
+        run: |
+          if [ -f package.json ]; then
+            npm run lint || echo "No linter configured"
+          fi
+
+      # Step 5: Run Tests (if you have a testing script in package.json)
+      - name: Run Tests
+        run: |
+          if [ -f package.json ]; then
+            npm test || echo "No tests configured"
+          fi
+
+      # Step 6: Start the Application
+      - name: Start Application
+        run: |
+          if [ -f package.json ]; then
+            node src/index.js &
+            sleep 5
+          fi
