@@ -4,6 +4,11 @@ const morgan = require("morgan");
 const app = express();
 const logger = require("./middleware");
 const { log } = require("console");
+const { title } = require("process");
+
+app.set('view engine','pug')
+app.set('views', './views')
+
 
 const startupDebugger = require("debug")("app:startup");
 const dbdebugger = require("debug")("app:db");
@@ -32,7 +37,8 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+//   res.send("Hello World");
+res.render("index",{title: "My Application", message: "Hello THis is message"});
 });
 app.listen(3000, () => {
   console.log("server is running on port 3000");
