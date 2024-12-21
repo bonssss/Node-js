@@ -1,12 +1,16 @@
 console.log("First")
 
  Settime(1,function(user){
-    console.log("Second user" , user)
+    console.log("new" , user)
  })
 
- repo(1, (username)=>{
-    console.log("Second user" , username)
+ repo().then((username)=>{
+    console.log("second pro",username)
  })
+
+//  repo( (username)=>{
+//     console.log("Second user" , username)
+//  })
 
 console.log("Second");
 
@@ -19,15 +23,13 @@ function Settime(id,callback){
 }
 
 
-function repo(username,callback){
-    setTimeout(() => {
-        console.log("repo called")
-        callback (['repo1','repo2','repo3'])
-        
-    }, 200);
+function repo(username){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log("repo called")
+            resolve(['repo1','repo2','repo3'])
+            
+        }, 200);
+    })
+    
 }
-// setTimeout(() => {
-//     console.log("wait for 0.2 sec");
-    
-    
-// }, 2000);
