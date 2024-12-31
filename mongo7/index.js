@@ -30,14 +30,48 @@ async function Creategenre(params) {
 // Creategenre();
 
 
-async function getGenre(params) {
+// async function getGenre(params) {
 
-    const getgenre = await Genre.find({genre:'horror'})
-    .limit(4)
-    .sort({title:1})
+//     const getgenre = await Genre.find({genre:'rock'})
+//     // .limit(4)
+//     // .sort({title:1})
 
-    console.log(getgenre)
+//     console.log(getgenre)
+    
+// }
+
+// logical operators
+
+// async function logicalop(params) {
+//     const result = await Genre.find()
+//     .or([{genre:"rock"},{artist:"john"}])
+
+//     console.log(result)
+
+    
+// }
+
+// getGenre()
+// logicalop()
+
+async function regularexp(params) {
+
+    /// starts with ro
+    // const result = await Genre.find({genre:/^ro/})
+
+    // ends with ck
+    // const result = await Genre.find({genre:/ck$/})
+
+
+    // cobntains the word r 
+
+    const result = await Genre.find({genre:/.*R.*/i}).countDocuments()
+  
+ 
+
+    console.log(result)
+    
     
 }
 
-getGenre()
+regularexp()
