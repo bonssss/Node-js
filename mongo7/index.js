@@ -1,4 +1,4 @@
-const { date } = require('joi')
+const { date, string, required } = require('joi')
 const mongoose =require('mongoose')
 
 
@@ -7,7 +7,8 @@ mongoose.connect('mongodb://localhost:27017/demo')
 .catch((err)=>console.log('error occured', err))
 
 const genreSchema = mongoose.Schema({
-    genre:String,
+    genre:{type:String, required:true},
+    category : {type:String , required:true, enum :['we','they','he']},
     title:String,
     artist:String,
     date: {type:Date, default:Date.now},
@@ -18,13 +19,18 @@ const Genre = mongoose.model('Genre',genreSchema)
 async function Creategenre(params) {
     const genre = new Genre({
         genre: 'horror',
+        category: 'the',
         title: 'rock music',
         artist: 'john',
         isreleased: true
         })
     
+        try{
      const result = await genre.save()
      console.log(result)  
+        }catch(err){
+            console.log(err.message) 
+        }
 }
 
 // Creategenre();
@@ -54,24 +60,24 @@ async function Creategenre(params) {
 // getGenre()
 // logicalop()
 
-async function regularexp(params) {
+// async function regularexp(params) {
 
-    /// starts with ro
-    // const result = await Genre.find({genre:/^ro/})
+//     /// starts with ro
+//     // const result = await Genre.find({genre:/^ro/})
 
-    // ends with ck
-    // const result = await Genre.find({genre:/ck$/})
+//     // ends with ck
+//     // const result = await Genre.find({genre:/ck$/})
 
 
-    // cobntains the word r 
+//     // cobntains the word r 
 
-    const result = await Genre.find({genre:/.*R.*/i}).countDocuments()
+//     const result = await Genre.find({genre:/.*R.*/i}).countDocuments()
   
  
 
-    console.log(result)
+//     console.log(result)
     
     
-}
+// }
 
-regularexp()
+Creategenre()
