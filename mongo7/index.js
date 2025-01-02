@@ -12,17 +12,26 @@ const genreSchema = mongoose.Schema({
     title:String,
     artist:String,
     date: {type:Date, default:Date.now},
-    isreleased : Boolean
+    isreleased : Boolean,
+    price :{
+        type:Number,
+        min:0,
+        max:100,
+        get : v=> Math.round(v),
+        set:v => Math.round(v)
+
+    }
 })
 
 const Genre = mongoose.model('Genre',genreSchema)
 async function Creategenre(params) {
     const genre = new Genre({
         genre: 'horror',
-        category: 'the',
+        category: 'they',
         title: 'rock music',
         artist: 'john',
-        isreleased: true
+        isreleased: true,
+        price: 12.5
         })
     
         try{
