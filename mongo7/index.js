@@ -29,7 +29,14 @@ async function Creategenre(params) {
      const result = await genre.save()
      console.log(result)  
         }catch(err){
-            console.log(err.message) 
+            // console.log(err.message)
+            
+           
+
+            for (field in err.errors){
+                console.log(err.errors[field])
+
+            }
         }
 }
 
