@@ -1,7 +1,7 @@
-const bcrypt =require('bcrypt')
+const bcrypt = require('bcrypt')
 
 async function run(params) {
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(10)
 
     const hashed = await bcrypt.hash('1234',salt)
     console.log(salt);
