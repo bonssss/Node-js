@@ -4,6 +4,7 @@ app.use(express.json())
 const router = express.Router()
 const {User} = require('../model/reduser')
 const _ =require('lodash')
+const bcrypt = require('bcrypt')
 
 router.post('/api/register',async (req,res)=>{
    
@@ -14,9 +15,11 @@ router.post('/api/register',async (req,res)=>{
         email:email,
         password:password
         })
+        const salt = await bcrypt.genSalt(10)
+        user.password = await bcrypt.hash(user.password, salt)
         user.save()
         .then(data => {
-            res.send( _.pick(user,['id','name']))
+            res.send( _.pick(user,['id','name','password']))
            
             })
             .catch(err => {
