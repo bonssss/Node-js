@@ -16,3 +16,12 @@ describe("absolute", () => {
     expect(result).toBe(0);
   });
 });
+
+describe ('greet',()=>{
+    it('should respond to string',()=>{
+  const result=      lib.greet('Bons')
+  expect (result).toMatch(/Bons/)
+//   expect(result).toBe('Welcome Bons');
+
+    })
+})
