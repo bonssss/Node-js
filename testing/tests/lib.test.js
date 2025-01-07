@@ -25,3 +25,18 @@ describe ('greet',()=>{
 
     })
 })
+
+
+describe('getCurrency',()=>{
+    it('should respond the array',()=>{
+        const result =lib.getCurrency()
+        expect(result).toContain('birr')
+    })
+})
+
+describe('getProduct',()=>{
+    it('shoud respond to object',()=>{
+   const result=     lib.getProduct(1)
+   expect(result).toEqual({id:1 , price:10})
+    })
+})
